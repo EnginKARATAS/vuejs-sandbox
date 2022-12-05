@@ -1,0 +1,19 @@
+{
+  "name": "vuejs-sandbox",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EnginKARATAS/vuejs-sandbox.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EnginKARATAS/vuejs-sandbox/issues"
+  },
+  "homepage": "https://github.com/EnginKARATAS/vuejs-sandbox#readme",
+  "description": ""
+}
