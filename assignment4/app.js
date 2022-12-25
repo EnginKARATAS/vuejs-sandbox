@@ -1,8 +1,9 @@
 let app = Vue.createApp({
   data() {
     return {
+      incomingStyle: "",
       toggleClass: "",
-      paragraphIsVisible: false,
+      paragraphIsVisibility: true,
       colorName: "",
     };
   },
@@ -12,19 +13,29 @@ let app = Vue.createApp({
     },
   },
   computed: {
-    paragraphClasses() {
+    toggleVisibilityParagraph() {
+      console.log(
+        "🚀 ~ file: app.js:17 ~ toggleVisibilityParagraph ~ toggleVisibilityParagraph",
+        "toggleVisibilityParagraph"
+      );
+      this.paragraphIsVisibility = !this.paragraphIsVisibility;
+    },
+    changeStyle() {
       return {
-        user1: this.toggleClass === "user1",
-        user2: this.toggleClass === "user2",
-        visible: this.paragraphIsVisible,
-        hidden: !this.paragraphIsVisible,
+        user1: this.incomingStyle === "user1",
+        user2: this.incomingStyle === "user2",
+        visible: this.paragraphIsVisibility,
+        hidden: !this.paragraphIsVisibility,
       };
     },
   },
   methods: {
-    showHide() {
-      console.log("d");
-      this.paragraphIsVisible = !this.paragraphIsVisible;
+    toggleParagraphVisibility() {
+      this.paragraphIsVisibility = !this.paragraphIsVisibility;
+      console.log(
+        "🚀 ~ file: app.js:35 ~ toggleParagraphVisibility ~ paragraphIsVisible",
+        this.paragraphIsVisibility
+      );
     },
   },
 });

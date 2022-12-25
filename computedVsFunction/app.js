@@ -15,10 +15,10 @@ let app = Vue.createApp({
   },
   methods: {
     printTextMethodA() {
-      console.log(" from method A:");
+      console.log(" from method A:", this.a);
     },
     printTextMethodB() {
-      console.log(" from method B:");
+      console.log(" from method B:", this.b);
     },
   },
 });
