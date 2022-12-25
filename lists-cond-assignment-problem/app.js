@@ -6,6 +6,11 @@ let app = Vue.createApp({
       outputArr: [],
     };
   },
+  computed: {
+    toggleTaskText() {
+      return this.listVisibility ? "Hide Content" : "Show Content";
+    },
+  },
   methods: {
     addToOutput() {
       this.outputArr.push(this.readingText);
