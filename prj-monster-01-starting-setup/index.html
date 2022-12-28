@@ -41,7 +41,7 @@
     <section id="log" class="container">
       <h2>Battle Log</h2>
       <ul>
-        <li v-for="log in logs" class="log--player">{{ log }}</li>
+        <li v-for="log in logs" :class="log.styleClass">{{ log }}</li>
       </ul>
     </section>
   </div>

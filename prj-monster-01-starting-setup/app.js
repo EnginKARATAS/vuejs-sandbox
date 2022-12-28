@@ -41,7 +41,11 @@ let app = Vue.createApp({
   },
   methods: {
     addLogMessage(who, what, value) {
-      this.logs.unshift(`${who} made ${what} and the value is ${value}`);
+      this.logs.unshift({
+        actionBy: who,
+        actionType: what,
+        actionValue: value
+      });
     },
     attackToMonster() {
       let randomNumber = getRandomInteger(5, 12);
