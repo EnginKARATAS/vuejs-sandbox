@@ -37,11 +37,17 @@
     <section v-else class="container">
       <h3>Game is over!!</h3>
       <p>The {{ winner }} won!!</p>
+      <button @click="tryAgain()">Try Again</button>
     </section>
     <section id="log" class="container">
       <h2>Battle Log</h2>
       <ul>
-        <li v-for="log in logs" :class="log.styleClass">{{ log }}</li>
+        <li v-for="log in logs">
+          <span :class="{'log--player': log.actionBy == 'player', 'log--monster': log.actionBy == 'monster'}">{{
+            log.actionBy }} is {{ log.actionType }}</span>
+          <span v-if="log.actionType == 'heal'" :class="{'log--heal': log.actionType=='heal'}"> amount {{ log.actionValue }}</span>
+          <span v-if="log.actionType == 'attack'" :class="{'log--damage': log.actionType=='attack'}"> amount {{ log.actionValue }}</span>
+        </li>
       </ul>
     </section>
   </div>

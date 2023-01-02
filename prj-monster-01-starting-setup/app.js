@@ -9,6 +9,8 @@ let app = Vue.createApp({
       monsterHealth: 100,
       playerHealth: 100,
       roundHolderNum: 0,
+      // lastMonsterHealth: null,
+      // lastPlayerHealth: null,
       winner: null,
       logs: [],
     };
@@ -16,8 +18,8 @@ let app = Vue.createApp({
   watch: {
     playerHealth(value) {
       if (value <= 0) {
-        this.playerHealth = 0;
         this.winner = "monster";
+        this.playerHealth = 0;
       } else if (value < 0 && this.monsterHealth < 0) {
         this.winner = "draw";
       }
@@ -27,8 +29,8 @@ let app = Vue.createApp({
     },
     monsterHealth(value) {
       if (value <= 0) {
-        this.monsterHealth = 0;
         this.winner = "player";
+        this.monsterHealth = 0;
       } else if (value < 0 && this.playerHealth < 0) {
         this.winner = "draw";
       }
@@ -44,11 +46,12 @@ let app = Vue.createApp({
       this.logs.unshift({
         actionBy: who,
         actionType: what,
-        actionValue: value
+        actionValue: value,
       });
     },
     attackToMonster() {
       let randomNumber = getRandomInteger(5, 12);
+      this.lastMonsterHealth = this.monsterHealth;
       this.monsterHealth = this.monsterHealth - randomNumber;
       this.attackToPlayer();
       this.roundHolderNum++;
@@ -56,9 +59,10 @@ let app = Vue.createApp({
     },
     attackToPlayer() {
       let randomNumber = getRandomInteger(8, 18);
+      this.lastPlayerHealth = this.playerHealth;
       this.playerHealth = this.playerHealth - randomNumber;
       this.roundHolderNum++;
-      this.addLogMessage("player", "attack", randomNumber);
+      this.addLogMessage("monster", "attack", randomNumber);
     },
     attackSpecialToMonster() {
       let randomNumber = getRandomInteger(15, 24);
@@ -68,20 +72,25 @@ let app = Vue.createApp({
       this.addLogMessage("player", "attack", randomNumber);
     },
     healPlayer() {
-      let randomNumber = getRandomInteger(20, 30);
-      this.playerHealth += randomNumber;
-      setTimeout(() => {
+      if (this.playerHealth <= 100 || this.playerHealth >= 0) {
+        let randomNumber = getRandomInteger(20, 30);
+        this.playerHealth += randomNumber;
         this.attackToPlayer();
-      }, 1000);
-      this.roundHolderNum++;
-      this.addLogMessage("player", "heal", randomNumber);
+        this.roundHolderNum++;
+        this.addLogMessage("player", "heal", randomNumber);
+      }
     },
     surrender() {
       this.playerHealth = 0;
       this.winner = "monster";
       this.addLogMessage("player", "surrender", -999);
     },
-
+    tryAgain() {
+      (this.monsterHealth = 100),
+        (this.playerHealth = 100),
+        (this.winner = null);
+      this.roundHolderNum = 0;
+    },
   },
 });
 
