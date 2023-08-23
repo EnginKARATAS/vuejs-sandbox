@@ -6,7 +6,7 @@
 export default {
   data() {
     return {
-      username:'emptyusername',
+      username:'emptyusername tatatesto',
       age:11
     };
   },
